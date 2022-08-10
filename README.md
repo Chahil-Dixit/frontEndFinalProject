@@ -1,4 +1,4 @@
-A Simple Project created, to add products, customer and supplier.
+A Simple Project created to add products, customer and supplier.
 
 - Admin can add products, customer and suppliers
 - Suppliers can also add products
