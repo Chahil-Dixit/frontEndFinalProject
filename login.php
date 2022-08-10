@@ -53,7 +53,7 @@ if (isset($_SESSION["loggedIn"])) {
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
+<script src="js/jQuery%20Validate/jquery.validate.min.js"></script>
 <script src="js/toastr.min.js"></script>
 <script>
     const container = document.querySelector(".container"),

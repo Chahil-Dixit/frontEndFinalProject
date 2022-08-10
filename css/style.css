@@ -255,3 +255,7 @@ body {
 .noSpaceWidth {
     width: 100vw;
 }
+
+select.error{
+    color: #495057;
+}

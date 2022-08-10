@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2022 at 06:17 AM
+-- Generation Time: Aug 10, 2022 at 03:07 AM
 -- Server version: 5.7.33
 -- PHP Version: 8.1.1
 
@@ -98,7 +98,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `productName`, `productId`, `supplierId`, `price`, `discount`, `tax`, `created_at`, `updated_at`) VALUES
-(1, 'test', 1659929856, 1, '332', '3', '13', '2022-08-08 03:37:36', '2022-08-08 06:03:08');
+(1, 'test', 1659929856, 1, '332', '13', '13', '2022-08-08 03:37:36', '2022-08-10 02:26:23');
 
 -- --------------------------------------------------------
 
