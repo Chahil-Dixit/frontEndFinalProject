@@ -4,22 +4,12 @@ session_start();
 
 // Add Invoice
 if ($_GET['name'] == 'add') {
-    foreach ($_POST as &$value) {
-        $value = strtolower($value);
-    }
-    $firstName = $_POST["firstName"];
-    $lastName = $_POST["lastName"];
-    $gender = $_POST["gender"];
-    $phone = $_POST["phone"];
-    $customerId = time();
-    $phone = preg_replace('/[^0-9]/', "", $phone);
-    $email = $_POST["email"];
-    $address = $_POST["address"];
-    $houseNumber = $_POST["houseNumber"];
-    $password = $_POST["password"];
-    $hash = base64_encode($password);
-    $query = "insert into customers (customerId, firstName, lastName, gender, phone, email, address, houseNumber, password)
- values('$customerId', '$firstName','$lastName','$gender',$phone, '$email', '$address','$houseNumber','$hash')";
+    extract($_POST);
+    print_r($_POST);
+    exit();
+    $invId = 'INV' . strtotime(time());
+    $customerId = $_SESSION['id'];
+    $query = "insert into customerinvoiceheader (invId, customerId) values('$invId', '$customerId')";
     if ($link->query($query) == FALSE) {
         echo json_encode([
             'status' => false,
@@ -28,7 +18,7 @@ if ($_GET['name'] == 'add') {
     } else {
         echo json_encode([
             'status' => true,
-            'message' => 'Customer Records Inserted'
+            'message' => 'Invoice Records Inserted'
         ]);
     }
 }

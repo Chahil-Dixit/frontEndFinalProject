@@ -150,8 +150,8 @@
             submitHandler: function (form) {
                 $.ajax({
                     type: "POST",
-                    url: base_url + "controller/orderController.php?name=add",
-                    data: form,
+                    url: base_url + "controller/invoiceController.php?name=add",
+                    data: $("#purchaseForm").serialize(),
                     dataType: 'json',
                     beforeSend: function () {
                         $(".loading").show();
