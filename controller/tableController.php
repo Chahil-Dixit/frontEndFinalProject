@@ -57,7 +57,7 @@ if (isset($_GET['name']) && $_GET['name'] == 'productsTable') {
             $customArray[$key]['product_id'] = $item['productId'];
             $customArray[$key]['productName'] = ucwords($item['productName']);
             $customArray[$key]['supplier_id'] = ucwords($item['firstName'] . ' ' . $item['lastName']);
-            $customArray[$key]['price'] = '&#36;' .$item['price'];
+            $customArray[$key]['price'] = '&#36;' . $item['price'];
             $customArray[$key]['tax'] = $item['tax'] . '%';
             $customArray[$key]['discount'] = $item['discount'] . '%';
         }
@@ -147,8 +147,10 @@ if (isset($_GET['name']) && $_GET['name'] == 'myInvoiceTable') {
     if (trim($search) != '') {
         if (!str_contains($sql_query, 'where')) {
             $sql_query .= ' where';
+        } else {
+            $sql_query .= ' and';
         }
-        $sql_query .= " and c.firstName LIKE '%$search%' OR c.lastName LIKE '%$search%' OR ih.id LIKE '%$search%'";
+        $sql_query .= " c.firstName LIKE '%$search%' OR c.lastName LIKE '%$search%' OR ih.id LIKE '%$search%'";
     }
 
     $totalData = mysqli_query($link, $sql_query);
@@ -197,9 +199,9 @@ if (isset($_GET['name']) && $_GET['name'] == 'supplierInvoiceTable') {
     $sql_query = "select ih.id as invoiceId,ih.invId, c.firstName, c.lastName, ifo.total, ifo.tax, ifo.total, ifo.discount, ifo.finalAmount from customerinvoiceheader ih left join customerinvoicefooter ifo on ifo.invId = ih.id
               left join customers c on c.id = ih.customerId";
 
-    if ($_SESSION['role'] != 'admin') {
-        $sql_query .= " where ih.supplierId = '$cId'";
-    }
+//    if ($_SESSION['role'] != 'admin') {
+//        $sql_query .= " where ih.supplierId = '$cId'";
+//    }
 
     $columns = $_POST["search"];
     $search = strtolower($columns['value']);
@@ -207,8 +209,10 @@ if (isset($_GET['name']) && $_GET['name'] == 'supplierInvoiceTable') {
     if (trim($search) != '') {
         if (!str_contains($sql_query, 'where')) {
             $sql_query .= ' where';
+        } else {
+            $sql_query .= ' and';
         }
-        $sql_query .= " and c.firstName LIKE '%$search%' OR c.lastName LIKE '%$search%' OR ih.id LIKE '%$search%'";
+        $sql_query .= " c.firstName LIKE '%$search%' OR c.lastName LIKE '%$search%' OR ih.id LIKE '%$search%'";
     }
 
     $totalData = mysqli_query($link, $sql_query);
