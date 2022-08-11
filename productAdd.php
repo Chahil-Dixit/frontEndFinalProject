@@ -9,7 +9,6 @@ require_once 'common/header.php'
                 <div class="form-group">
                     <label for="productName">Product Name:</label>
                     <input type="text" name="productName" class="form-control text-capitalize"
-                           onkeypress="lettersOnly(event)"
                            placeholder="Enter product name" id="productName" required maxlength="255"/>
                 </div>
 
@@ -22,20 +21,17 @@ require_once 'common/header.php'
 
                 <div class="form-group mt-3">
                     <label for="price">Price:</label>
-                    <input type="text" class="form-control" name="price" onkeypress="isNumber(event)"
-                           placeholder="Enter price" id="price"/>
+                    <input type="text" class="form-control" name="price" placeholder="Enter price" id="price"/>
                 </div>
 
                 <div class="form-group mt-3">
                     <label for="tax">Tax %:</label>
-                    <input type="text" class="form-control" name="tax" onkeypress="isNumber(event)"
-                           placeholder="Enter tax" id="tax"/>
+                    <input type="text" class="form-control" name="tax" placeholder="Enter tax" id="tax"/>
                 </div>
 
                 <div class="form-group mt-3">
                     <label for="discount">Discount %:</label>
-                    <input type="text" class="form-control" name="discount" onkeypress="isNumber(event)"
-                           placeholder="Enter discount" id="discount"/>
+                    <input type="text" class="form-control" name="discount" placeholder="Enter discount" id="discount"/>
                 </div>
 
                 <div class="buttons float-right">
@@ -69,6 +65,10 @@ require_once 'common/header.php'
 
         $(document).on("keypress", "#tax, #price, #discount", function (event) {
             return isNumber(event);
+        });
+
+        $(document).on("keypress", "#productName,", function (event) {
+            return lettersOnly(event);
         });
 
         $('#customerForm').validate({
@@ -124,7 +124,6 @@ require_once 'common/header.php'
         });
 
         $(document).on("click", "#submit", function () {
-            console.log('asd');
             if ($("#customerForm").valid()) {
                 console.log('form valid');
                 $.ajax({

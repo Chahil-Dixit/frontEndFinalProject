@@ -73,8 +73,10 @@
                                 <div class="form-group mt-3">
                                     <label for="addMore" class="noSpaceWidth">&nbsp;</label>
                                     <div class="btn-group">
-                                        <button class="btn btn-light form-control" id="addMore">Add More Item</button>
-                                        <button class="btn btn-danger form-control remove" id="remove">
+                                        <button class="btn btn-success form-control add-more" type="button">Add More
+                                            Item
+                                        </button>
+                                        <button class="btn btn-danger form-control remove" id="remove" type="button">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -104,20 +106,22 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary addOrder">Order Summary</button>
-                <button type="button" class="btn btn-primary placeOrder">Place Order</button>
+                <button type="button" class="btn btn-primary placeOrder hide">Place Order</button>
             </div>
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
     let productList = [];
     let total = 0;
     let tax = 0;
     let discount = 0;
     let finalAmount = 0;
+    let invId = '';
 
     $(document).ready(function () {
-        $(".add-more").click(function () {
+        $(document).on("click", ".add-more", function (event) {
             let lastQty = $('form input[name^="qty"]:last').prop('id');
             // Read the Number from last input and increment id value by 1
             let num = parseInt(lastQty.match(/\d+/g), 10) + 1;
@@ -144,6 +148,8 @@
             getProductsList();
         }).on('hide.bs.modal', function () {
             $('#purchaseForm')[0].reset();
+            $('.placeOrder').addClass('hide');
+            $(".card-footer").addClass('hide');
         });
 
         $("#purchaseForm").validate({
@@ -159,9 +165,10 @@
                     success: function (data) {
                         $(".loading").hide();
                         if (data.status) {
-
+                            toastr.success(data.message);
+                            $('#purchaseModal').modal('hide');
+                            location.reload();
                         } else {
-                            console.log('error');
                             toastr.error(data.message);
                         }
                     },
@@ -184,8 +191,9 @@
             return false;
         });
 
-        $(document).on("click", ".addOrder, .placeOrder", function (event) {
+        $(document).on("click", ".addOrder", function (event) {
             calculateTotal();
+            $('.placeOrder').removeClass('hide');
         });
 
         $(document).on("click", ".placeOrder", function (event) {
@@ -229,7 +237,7 @@
             tax = 0;
             discount = 0;
             finalAmount = 0;
-            $("form [name^=product] > option:selected").each(function (i, j) {
+            $("form [name^=product]").each(function (i, j) {
                 let productData = $('#product' + i + ' option:selected');
                 let tempTotal = productData.data('price');
                 let tempTax = productData.data('tax');
@@ -241,10 +249,13 @@
                 }
                 tax += tempTotal * (tempTax / 100);
                 total += tempTotal;
+                console.log(total);
             });
+            console.log(discount);
             total = total - discount;
+            console.log(total);
             $('.totalBeforeTax').html('&nbsp;&nbsp;&nbsp;$' + parseFloat(total).toFixed(2));
-            $("input[name^='total']").val(tax);
+            $("input[name^='total']").val(parseFloat(total).toFixed(2));
 
             finalAmount = tax + total;
             tax = parseFloat(tax).toFixed(2);
@@ -254,10 +265,11 @@
             $('.tax').html('&nbsp;&nbsp;&nbsp;$' + tax);
             $("input[name^='tax']").val(tax);
             $('.discount').html('-&nbsp;$' + discount);
-            $("input[name^='discount']").val(tax);
+            $("input[name^='discount']").val(discount);
             $('.finalTotal').html('&nbsp;&nbsp;&nbsp;$' + finalAmount);
-            $("input[name^='finalTotal']").val(tax);
+            $("input[name^='finalTotal']").val(finalAmount);
             $(".card-footer").removeClass('hide');
+            $('.placeOrder').removeClass('hide');
         }
     }
 </script>

@@ -46,25 +46,37 @@ if (!isset($_SESSION["loggedIn"])) {
 </nav>
 
 <ul class="sidebar">
+    <!--    <li>-->
+    <!--        <a class="text-decoration-none" href="index.php">Dashboard</a>-->
+    <!--    </li>-->
+    <?php if ($_SESSION['role'] === 'admin') { ?>
+        <li>
+            <a class="text-decoration-none" href="customerView.php">Customers</a>
+        </li>
+        <li>
+            <a class="text-decoration-none" href="supplierView.php">Suppliers</a>
+        </li>
+    <?php }
+    if ($_SESSION['role'] === 'suppliers' || $_SESSION['role'] === 'admin') {
+        ?>
+        <li>
+            <a class="text-decoration-none" href="productView.php">Product</a>
+        </li>
+    <?php } ?>
     <li>
-        <a class="text-decoration-none" href="index.php">Dashboard</a>
+        <a class="text-decoration-none" href="myInvoiceView.php">
+            <?php echo(($_SESSION['role'] === 'suppliers' || $_SESSION['role'] === 'admin') ? 'Customer' : 'My'); ?>
+            Invoices
+        </a>
     </li>
-    <li>
-        <a class="text-decoration-none" href="customerView.php">Customers</a>
-    </li>
-    <li>
-        <a class="text-decoration-none" href="supplierView.php">Suppliers</a>
-    </li>
-    <li>
-        <a class="text-decoration-none" href="productView.php">Product</a>
-    </li>
-    <li>
-        <a class="text-decoration-none" href="#">Customer Invoice</a>
-    </li>
-    <li>
-        <a class="text-decoration-none" href="#">Suppliers Invoice</a>
-    </li>
-    <li>
-        <a class="text-decoration-none" href="#" data-toggle="modal" data-target="#purchaseModal">Purchase</a>
-    </li>
+    <?php if ($_SESSION['role'] === 'suppliers' || $_SESSION['role'] === 'admin') { ?>
+        <li>
+            <a class="text-decoration-none" href="supplierInvoice.php">Suppliers Invoice</a>
+        </li>
+    <?php }
+    if ($_SESSION['role'] !== 'admin') { ?>
+        <li>
+            <a class="text-decoration-none" href="#" data-toggle="modal" data-target="#purchaseModal">Purchase</a>
+        </li>
+    <?php } ?>
 </ul>

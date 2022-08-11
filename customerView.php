@@ -12,7 +12,7 @@
                 </h4>
             </div>
             <div class="card-body">
-                <div class="table-responsive path_report_print" id="table-responsive">
+                <div class="table-responsive" id="table-responsive">
                     <table class="table table-striped table-bordered text-center" id="customerTable">
                         <thead>
                         <tr>
