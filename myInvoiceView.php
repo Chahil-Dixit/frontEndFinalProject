@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header head-bg-info">
                 <h4 class="m-b-0">
-                    My Invoices
+                    <?php echo(($_SESSION['role'] === 'suppliers' || $_SESSION['role'] === 'admin') ? 'Customer' : 'My'); ?> Invoices
                 </h4>
             </div>
             <div class="card-body">

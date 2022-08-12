@@ -34,7 +34,7 @@ if (isset($_SESSION["loggedIn"])) {
 
                 <div class="input-field">
                     <input type="password" id="password" placeholder="Enter your password" required
-                           autocomplete="new-password" name="password">
+                           autocomplete="new-password" name="password" class="password">
                     <i class="uil uil-lock icon"></i>
                     <i class="uil uil-eye-slash showHidePw"></i>
                 </div>

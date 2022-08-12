@@ -19,7 +19,7 @@
                             <th class="text-center">#</th>
                             <th class="text-center">Product Id</th>
                             <th class="text-center">Product Name</th>
-                            <th class="text-center">Supplier Id</th>
+                            <th class="text-center">Supplier Name</th>
                             <th class="text-center">Price</th>
                             <th class="text-center">Tax</th>
                             <th class="text-center">Discount</th>
