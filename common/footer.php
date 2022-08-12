@@ -131,7 +131,7 @@
             $(".after-add-more").after(html);
 
             $("form input[name^='qty']:last").prop('id', 'qty' + num);
-            $("form input[name^='product']:last").prop('id', 'product' + num);
+            $("form inpu    t[name^='product']:last").prop('id', 'product' + num);
         });
 
         $("body").on("click", ".remove", function () {
@@ -193,7 +193,6 @@
 
         $(document).on("click", ".addOrder", function (event) {
             calculateTotal();
-            $('.placeOrder').removeClass('hide');
         });
 
         $(document).on("click", ".placeOrder", function (event) {
